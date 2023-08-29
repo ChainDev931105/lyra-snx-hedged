@@ -8,7 +8,7 @@ import { HedgeRouter, IERC20 } from "../typechain-types";
 describe("HedgeRouter", function () {
   const LYRA_MARKET_ADDRESS = "0x59c671B1a1F261FB2192974B43ce1608aeFd328E";
   const SNX_MARKET_ADDRESS = "0xf86048DFf23cF130107dfB4e6386f574231a5C65";
-  const SUSD_ADDRESS = "0x8c6f28f2f1a3c87f0f938b96d27520d9751ec8d9";
+  const SUSD_ADDRESS = "0x8c6f28f2F1A3C87F0f938b96d27520d9751ec8d9";
   const OPTION_AMOUNT = ethers.parseEther("0.1"); // 0.1 ETH
   const COLLATERAL = 100 * 10 ** 6; // 100 USDC
   const MARGIN = ethers.parseEther("100"); // 100 SUSD

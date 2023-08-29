@@ -33,7 +33,7 @@ contract HedgeRouter is Ownable {
     }
 
     function buyHedgedCall(uint strikeId, uint amount) external onlyOwner {
-        uint orgBalance = USDC.balanceOf(address(this));
+        // uint orgBalance = USDC.balanceOf(address(this));
         ILyraOptionMarket.Result memory result = lyraMarket.openPosition(
             ILyraOptionMarket.TradeInputParameters({
                 strikeId: strikeId,
@@ -47,34 +47,30 @@ contract HedgeRouter is Ownable {
                 referrer: address(0)
             })
         );
-        uint newBalance = USDC.balanceOf(address(this));
+        // uint newBalance = USDC.balanceOf(address(this));
 
-        console.log(result.positionId, result.totalCost, result.totalFee);
-        console.log(orgBalance, newBalance);
+        // console.log(result.positionId, result.totalCost, result.totalFee);
+        // console.log(orgBalance, newBalance);
 
-        ISNXFuturesMarket.Position memory orgPosition = snxMarket.positions(address(this));
+        // ISNXFuturesMarket.Position memory orgPosition = snxMarket.positions(address(this));
         snxMarket.modifyPosition(-int(amount));
-        ISNXFuturesMarket.Position memory newPosition = snxMarket.positions(address(this));
+        // ISNXFuturesMarket.Position memory newPosition = snxMarket.positions(address(this));
 
-        console.log(
-            orgPosition.id,
-            // orgPosition.lastFundingIndex,
-            orgPosition.margin,
-            orgPosition.lastPrice,
-            uint128(orgPosition.size)
-        );
-        console.log(
-            newPosition.id,
-            // newPosition.lastFundingIndex,
-            newPosition.margin,
-            newPosition.lastPrice,
-            newPosition.size > 0 ? uint128(newPosition.size) : uint128(-newPosition.size)
-        );
+        // console.log(
+        //     orgPosition.id,
+        //     // orgPosition.lastFundingIndex,
+        //     orgPosition.margin,
+        //     orgPosition.lastPrice,
+        //     uint128(orgPosition.size)
+        // );
+        // console.log(
+        //     newPosition.id,
+        //     // newPosition.lastFundingIndex,
+        //     newPosition.margin,
+        //     newPosition.lastPrice,
+        //     newPosition.size > 0 ? uint128(newPosition.size) : uint128(-newPosition.size)
+        // );
     }
-
-    // function reHedge() external {
-
-    // }
 
     function addMargin(uint amount) external onlyOwner {
         require(amount <= uint256(type(int256).max), "Amount exceeds the limit");
